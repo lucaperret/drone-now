@@ -1,0 +1,14 @@
+pipeline:
+  github:
+    image: plugins/github-release
+    secrets: [ github_release_api_key ]
+    when:
+      event: [ tag ]
+
+  docker:
+    image: plugins/docker
+    secrets: [ docker_username, docker_password ]
+    repo: ${DRONE_REPO}
+    auto_tag: true
+    when:
+      event: [ push, tag ]
