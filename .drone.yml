@@ -2,6 +2,9 @@ pipeline:
   github:
     image: plugins/github-release
     secrets: [ github_token ]
+    files:
+      - Dockerfile
+      - script.sh
     when:
       event: tag
 
