@@ -8,7 +8,7 @@ pipeline:
   docker:
     image: plugins/docker
     secrets: [ docker_username, docker_password ]
-    repo: ${DRONE_REPO}
+    repo: lucap/drone-now
     auto_tag: true
     when:
       event: [ push, tag ]
