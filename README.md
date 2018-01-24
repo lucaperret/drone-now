@@ -10,10 +10,7 @@ Deploying to [now.sh](https://zeit.co/now) with [Drone](https://drone.io) CI. Fo
 
 There are two ways to deploy.
 
-* [usage from docker](#usage-from-docker)
-* [usage from drone CI](#usage-from-drone-ci)
-
-### Usage from docker
+### From docker
 
 Deploy the working directory to now.
 
@@ -26,7 +23,7 @@ docker run --rm \
   lucap/drone-now
 ```
 
-### Usage from Drone CI
+### From Drone CI
 
 ```yaml
 pipeline:

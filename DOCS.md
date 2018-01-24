@@ -75,7 +75,7 @@ pipeline:
 +   type: npm
 ```
 
-Example configuration using password from secrets:
+Example configuration using token from secrets:
 
 ```diff
 pipeline:
