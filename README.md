@@ -1,4 +1,6 @@
-# drone-now
+# Drone-now
+
+![Now logo](now.png?raw=true "Now")
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/lucap/drone-now.svg)](https://hub.docker.com/r/lucap/drone-now/)
 [![](https://images.microbadger.com/badges/image/lucap/drone-now.svg)](https://microbadger.com/images/lucap/drone-now "Get your own image badge on microbadger.com")
