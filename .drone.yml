@@ -1,9 +1,9 @@
 pipeline:
   github:
     image: plugins/github-release
-    secrets: [ github_release_api_key ]
+    secrets: [ github_token ]
     when:
-      event: [ tag ]
+      event: tag
 
   docker:
     image: plugins/docker
