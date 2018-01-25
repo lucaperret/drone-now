@@ -1,5 +1,6 @@
 FROM node:alpine
 
+LABEL maintainer="Luca Perret <perret.luca@gmail.com>"
 LABEL org.label-schema.version=latest
 LABEL org.label-schema.vcs-url="https://github.com/lucaperret/drone-now"
 LABEL org.label-schema.name="drone-now"
