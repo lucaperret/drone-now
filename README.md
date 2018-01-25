@@ -18,8 +18,8 @@ Deploy the working directory to now.
 
 ```bash
 docker run --rm \
-  -e NOW_TOKEN=xxxxxxx \
-  -e NOW_ALIAS=my-deployment-alias.now.sh \
+  -e PLUGIN_TOKEN=xxxxxxx \
+  -e PLUGIN_ALIAS=my-deployment-alias.now.sh \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
   lucap/drone-now
@@ -32,5 +32,5 @@ pipeline:
   now:
     image: lucap/drone-now
     token: xxxxx
-    name: deployment-name
+    alias: my-deployment-alias.now.sh
 ```
