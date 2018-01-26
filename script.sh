@@ -30,11 +30,10 @@ then
     NOW_OPTIONS="${NOW_OPTIONS} --$PLUGIN_TYPE"
 fi
 
-echo "> ${PLUGIN_API_TOKEN} $NOW_TOKEN"
-if [ -n "$PLUGIN_API_TOKEN" ]
+if [ -n "$NOW_TOKEN" ] && [ -n "$PLUGIN_DIRECTORY" ]
 then
-    NOW_OPTIONS="${NOW_OPTIONS} --token $PLUGIN_API_TOKEN "
-    echo "> Deploying on now.sh… with options ${NOW_OPTIONS}"
+    NOW_OPTIONS="${NOW_OPTIONS} --token $NOW_TOKEN "
+    echo "> Deploying on now.sh… with options ${NOW_OPTIONS} $PLUGIN_DIRECTORY"
     NOW_DEPLOYMENT_URL=`$nowBin$NOW_OPTIONS`
     echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL!"
 else
