@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-nowBin="./node_modules/.bin/now"
+nowBin="now"
 
 NOW_OPTIONS=""
 
@@ -37,7 +37,7 @@ then
     NOW_DEPLOYMENT_URL=`$nowBin$NOW_OPTIONS`
     echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL!"
 else
-    echo "> Error! NOW_TOKEN is required"
+    echo "> Error! NOW_TOKEN and `directory` parameter are required"
 fi
 
 if [ -n "$PLUGIN_ALIAS" ]

@@ -8,7 +8,7 @@ LABEL org.label-schema.description="Deploying to now.sh with Drone CI"
 LABEL org.label-schema.vendor="Luca Perret"
 LABEL org.label-schema.schema-version="1.0"
 
-RUN npm install now
+RUN npm install -g now
 
 ADD script.sh /bin/
 RUN chmod +x /bin/script.sh
