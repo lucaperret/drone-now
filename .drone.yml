@@ -1,17 +1,7 @@
 pipeline:
-  github:
-    image: plugins/github-release
-    secrets: [ github_token ]
-    files:
-      - Dockerfile
-      - script.sh
-    when:
-      event: tag
-
   docker:
     image: plugins/docker
     secrets: [ docker_username, docker_password ]
     repo: andyet/drone-now
-    auto_tag: true
     when:
-      event: [ push, tag ]
+      event: [ tag ]
