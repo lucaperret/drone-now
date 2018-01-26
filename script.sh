@@ -14,23 +14,26 @@ NOW_OPTIONS="${NOW_OPTIONS} --no-clipboard"
 
 if [ -n "$PLUGIN_DEPLOY_NAME" ]
 then
+    echo "> adding deploy_name $PLUGIN_DEPLOY_NAME"
     NOW_OPTIONS="${NOW_OPTIONS} --name $PLUGIN_DEPLOY_NAME"
 fi
 
 if [ -n "$PLUGIN_TEAM" ]
 then
+    echo "> adding team $PLUGIN_TEAM"
     NOW_OPTIONS="${NOW_OPTIONS} --team $PLUGIN_TEAM"
 fi
 
 if [ -n "$PLUGIN_TYPE" ]
 then
+    echo "> adding type $PLUGIN_TYPE"
     NOW_OPTIONS="${NOW_OPTIONS} --$PLUGIN_TYPE"
 fi
 
 if [ -n "$PLUGIN_TOKEN" ]
 then
     NOW_OPTIONS="${NOW_OPTIONS} --token $PLUGIN_TOKEN "
-    echo "> Deploying on now.sh…"
+    echo "> Deploying on now.sh… with options ${NOW_OPTIONS}"
     NOW_DEPLOYMENT_URL=`$nowBin$NOW_OPTIONS`
     echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL!"
 else
