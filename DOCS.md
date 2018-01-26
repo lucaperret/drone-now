@@ -18,6 +18,16 @@ pipeline:
     name: deployment-name
 ```
 
+Example configuration with team scope:
+
+```diff
+pipeline:
+  now:
+    image: lucap/drone-now
+    token: xxxxx
++   team: myteam
+```
+
 Example configuration for assigning [Aliases and Domains](https://zeit.co/docs/features/aliases):
 
 ```diff
@@ -100,6 +110,9 @@ name
 
 alias
 : Target Now.sh subdomain or domain
+
+team
+: Set the team scope
 
 git_repository
 : Git repository of your choice
