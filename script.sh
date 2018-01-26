@@ -30,6 +30,7 @@ then
     NOW_OPTIONS="${NOW_OPTIONS} --$PLUGIN_TYPE"
 fi
 
+echo "> ${PLUGIN_API_TOKEN} $NOW_TOKEN"
 if [ -n "$PLUGIN_API_TOKEN" ]
 then
     NOW_OPTIONS="${NOW_OPTIONS} --token $PLUGIN_API_TOKEN "
