@@ -16,6 +16,7 @@ Use case examples:
 ## Usage
 
 For the usage information and a listing of the available options please take a look at [the docs](DOCS.md).
+
 There are two ways to deploy.
 
 ### From docker
