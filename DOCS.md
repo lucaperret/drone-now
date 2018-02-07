@@ -29,6 +29,7 @@ pipeline:
 +   team: myteam
 ```
 
+
 Example configuration to enforce type (by default, it's detected automatically):
 
 ```diff

@@ -3,12 +3,19 @@
 ![Now logo](now.png?raw=true "now.sh")
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/lucap/drone-now.svg)](https://hub.docker.com/r/lucap/drone-now/)
-[![](https://images.microbadger.com/badges/image/lucap/drone-now.svg)](https://microbadger.com/images/lucap/drone-now "Get your own image badge on microbadger.com")
+[![Image](https://images.microbadger.com/badges/image/lucap/drone-now.svg)](https://microbadger.com/images/lucap/drone-now "Get your own image badge on microbadger.com")
 [![GitHub release](https://img.shields.io/github/release/lucaperret/drone-now.svg)](https://github.com/lucaperret/drone-now/releases/latest)
 
-Deploying to [now.sh](https://zeit.co/now) with [Drone](https://drone.io) CI. For the usage information and a listing of the available options please take a look at [the docs](DOCS.md).
+Deploying to [now.sh](https://zeit.co/now) with [Drone](https://drone.io) CI.
+
+Use case examples:
+
+- Automatically create staging deployments for pull requests
+- Automatically deploy and alias upon pushes to master
 
 ## Usage
+
+For the usage information and a listing of the available options please take a look at [the docs](DOCS.md).
 
 There are two ways to deploy.
 
