@@ -14,8 +14,8 @@ The Now plugin deploy your build to [now.sh](https://zeit.co/now). The below pip
 pipeline:
   now:
     image: lucap/drone-now
-    token: xxxxx
-    name: deployment-name
+    deploy_name: deployment-name
+    secrets: [ now_token ]
 ```
 
 Example configuration with team scope:
@@ -24,8 +24,21 @@ Example configuration with team scope:
 pipeline:
   now:
     image: lucap/drone-now
-    token: xxxxx
+    deploy_name: deployment-name
+    secrets: [ now_token ]
 +   team: myteam
+```
+
+Example configuration to enforce type (by default, it's detected automatically):
+
+```diff
+pipeline:
+  now:
+    image: lucap/drone-now
+    deploy_name: deployment-name
+    secrets: [ now_token ]
+-   team: myteam
++   type: npm
 ```
 
 Example configuration for assigning [Aliases and Domains](https://zeit.co/docs/features/aliases):
@@ -34,20 +47,10 @@ Example configuration for assigning [Aliases and Domains](https://zeit.co/docs/f
 pipeline:
   now:
     image: lucap/drone-now
-    token: xxxxx
--   name: deployment-name
+    deploy_name: deployment-name
+    secrets: [ now_token ]
+-   type: npm
 +   alias: my-deployment-alias
-```
-
-Example deploying [Git repositories](https://zeit.co/docs/features/repositories):
-
-```diff
-pipeline:
-  now:
-    image: lucap/drone-now
-    token: xxxxx
--   alias: my-deployment-alias
-+   git_repository: username/repository
 ```
 
 Example configuration with custom [Path Aliases](https://zeit.co/docs/features/path-aliases):
@@ -56,8 +59,8 @@ Example configuration with custom [Path Aliases](https://zeit.co/docs/features/p
 pipeline:
   now:
     image: lucap/drone-now
-    token: xxxxx
--   git_repository: username/repository
+    deploy_name: deployment-name
+    secrets: [ now_token ]
 +   rules_domain: example.com
 +   rules_file: rules.json
 ```
@@ -68,32 +71,13 @@ Example configuration for [Scaling](https://zeit.co/docs/getting-started/scaling
 pipeline:
   now:
     image: lucap/drone-now
-    token: xxxxx
+    deploy_name: deployment-name
+    secrets: [ now_token ]
 -   rules_domain: example.com
 -   rules_file: rules.json
 +   scale: 2
 ```
 
-Example configuration to enforce type (by default, it's detected automatically):
-
-```diff
-pipeline:
-  now:
-    image: lucap/drone-now
-    token: xxxxx
--   scale: 2
-+   type: npm
-```
-
-Example configuration using token from secrets:
-
-```diff
-pipeline:
-  now:
-    image: lucap/drone-now
--   token: xxxxx
-+   secrets: [ now_token ]
-```
 
 # Secret Reference
 
@@ -102,20 +86,17 @@ now_token
 
 # Parameter Reference
 
-token
-: Now token
-
-name
+deploy_name
 : Set the name of the deployment
-
-alias
-: Target Now.sh subdomain or domain
 
 team
 : Set the team scope
 
-git_repository
-: Git repository of your choice
+type
+: Deployment type (docker, npm, static)
+
+alias
+: Target Now.sh subdomain or domain
 
 rules_domain
 : Your domain
@@ -125,6 +106,3 @@ rules_file
 
 scale
 : Min and Max scaling values
-
-type
-: Deployment type (docker, npm, static)

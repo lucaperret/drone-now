@@ -1,9 +1,7 @@
 #!/bin/sh
 set -e
 
-echo "PLUGIN_TOKEN is ${PLUGIN_TOKEN}"
-
-NOW_OPTIONS=" --no-clipboard"
+NOW_DEPLOY_OPTIONS=" --no-clipboard"
 NOW_AUTH=""
 
 if [ -n "$NOW_TOKEN" ]
@@ -27,7 +25,7 @@ fi
 if [ -n "$PLUGIN_DEPLOY_NAME" ]
 then
     echo "> adding deploy_name $PLUGIN_DEPLOY_NAME"
-    NOW_OPTIONS="${NOW_OPTIONS} --name $PLUGIN_DEPLOY_NAME"
+    NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS} --name $PLUGIN_DEPLOY_NAME"
 else
     echo "> No deployment name provided. The directory will be used as the name"
 fi
@@ -35,16 +33,16 @@ fi
 if [ -n "$PLUGIN_TYPE" ]
 then
     echo "> adding type $PLUGIN_TYPE"
-    NOW_OPTIONS="${NOW_OPTIONS} --$PLUGIN_TYPE"
+    NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS} --$PLUGIN_TYPE"
 else
     echo "> No deployment type provided."
 fi
 
 if [ -n "$PLUGIN_DIRECTORY" ]
 then
-    NOW_OPTIONS="${NOW_OPTIONS}"
+    NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS}"
     echo "> Deploying $PLUGIN_DIRECTORY on now.sh…" &&
-    NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_OPTIONS $PLUGIN_DIRECTORY) &&
+    NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_DEPLOY_OPTIONS $PLUGIN_DIRECTORY) &&
     echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL";
 else
     echo "> Error!! the directory parameter is required"
