@@ -56,11 +56,14 @@ then
     NOW_DEPLOYMENT_URL="https://$PLUGIN_ALIAS";
 fi
 
-if [ "$PLUGIN_CLEANUP" == "true" ]
+if [ "$PLUGIN_CLEANUP" == "true" ] && [ -n "$PLUGIN_ALIAS" ]
 then
     echo "> Cleaning up old deployments…" &&
+    echo "now rm --safe --yes $NOW_AUTH $PLUGIN_ALIAS" &&
     ALIAS_SUCCESS_MESSAGE=$(now rm --safe --yes $NOW_AUTH $PLUGIN_ALIAS) &&
     echo "$ALIAS_SUCCESS_MESSAGE"
+else
+    echo "> Warning!! You must set the alias parameter when using the cleanup parameter so that now.sh knows which deployments to remove!"
 fi
 
 if [ -n "$PLUGIN_SCALE" ]

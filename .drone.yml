@@ -4,4 +4,7 @@ pipeline:
     secrets: [ docker_username, docker_password ]
     repo: andyet/drone-now
     when:
-      event: [ tag ]
+      event: tag
+branches:
+  - master
+  - add-cleanup
