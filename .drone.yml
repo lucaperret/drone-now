@@ -7,4 +7,3 @@ pipeline:
       event: tag
 branches:
   - master
-  - add-cleanup
