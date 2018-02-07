@@ -56,12 +56,10 @@ then
     NOW_DEPLOYMENT_URL="https://$PLUGIN_ALIAS";
 fi
 
-echo "cleanup? $PLUGIN_CLEANUP"
-echo "cleanup? $PLUGIN_CLEAN"
-echo "cleanup? $PLUGIN_LIMPIAR"
-if [ "$PLUGIN_LIMPIAR" == "clean" ]
+if [ "$PLUGIN_CLEANUP" == "true" ]
 then
     echo "> Cleaning up old deployments…" &&
+    echo "now rm --safe --yes $NOW_AUTH $PLUGIN_ALIAS" &&
     ALIAS_SUCCESS_MESSAGE=$(now rm --safe --yes $NOW_AUTH $PLUGIN_ALIAS) &&
     echo "$ALIAS_SUCCESS_MESSAGE"
 fi
