@@ -60,7 +60,7 @@ if [ "$PLUGIN_CLEANUP" == "true" ]
 then
     echo "> Cleaning up old deployments…" &&
     ALIAS_SUCCESS_MESSAGE=$(now rm --safe --yes $NOW_AUTH $PLUGIN_ALIAS) &&
-    echo "$ALIAS_SUCCESS_MESSAGE" &&
+    echo "$ALIAS_SUCCESS_MESSAGE"
 fi
 
 if [ -n "$PLUGIN_SCALE" ]
