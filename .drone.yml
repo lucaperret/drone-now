@@ -1,7 +1,0 @@
-pipeline:
-  docker:
-    image: plugins/docker
-    secrets: [ docker_username, docker_password ]
-    repo: andyet/drone-now
-    when:
-      event: [ tag ]
