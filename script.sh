@@ -61,7 +61,6 @@ then
     if [ -n "$PLUGIN_ALIAS" ]
     then
         echo "> Cleaning up old deployments…" &&
-        echo "now rm --safe --yes $NOW_AUTH $PLUGIN_ALIAS" &&
         ALIAS_SUCCESS_MESSAGE=$(now rm --safe --yes $NOW_AUTH $PLUGIN_ALIAS) &&
         echo "$ALIAS_SUCCESS_MESSAGE"
     else
