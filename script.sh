@@ -2,6 +2,7 @@
 set -e
 
 NOW_DEPLOY_OPTIONS=" --no-clipboard"
+NOW_AUTH=""
 
 # Get the token or error
 if [ -z "$PLUGIN_NOW_TOKEN" ]
