@@ -9,6 +9,7 @@ image: lucap/drone-now
 ---
 
 The Now plugin deploy your build to [now.sh](https://zeit.co/now). The below pipeline configuration demonstrates simple usage:
+
 Note: `deploy_name` is an optional parameter. If it is not given now.sh will deploy the root directory of your application.
 
 ```yaml
@@ -16,17 +17,28 @@ pipeline:
   now:
     image: lucap/drone-now
     deploy_name: deployment-name
-    secrets: [ now_token ]
+    now_token: keep-this-secret
 ```
 
-Set the directory you want to deploy. See the [Deployment Documentation](https://zeit.co/docs/getting-started/deployment#) for more info.
+Or use the secret NOW_TOKEN instead, if you supply both the plugin will use the `now_token` parameter first
 
-```yaml
+```diff
 pipeline:
   now:
     image: lucap/drone-now
     deploy_name: deployment-name
-    secrets: [ now_token ]
+-   now_token: keep-this-secret
++   secrets: [ now_token ]
+```
+
+Set the directory you want to deploy. See the [Deployment Documentation](https://zeit.co/docs/getting-started/deployment#) for more info.
+
+```diff
+pipeline:
+  now:
+    image: lucap/drone-now
+    deploy_name: deployment-name
+-   secrets: [ now_token ]
 +   directory: public
 ```
 
@@ -38,7 +50,7 @@ pipeline:
     image: lucap/drone-now
     deploy_name: deployment-name
     secrets: [ now_token ]
-    directory: public
+-   directory: public
 +   team: myteam
 ```
 
@@ -68,7 +80,8 @@ pipeline:
 +   alias: my-deployment-alias
 ```
 
-Example configuration for [Cleaning Up Old Deployments](https://zeit.co/docs/features/aliases):
+Example configuration for [Cleaning Up Old Deployments](https://zeit.co/docs/other/faq#how-do-i-remove-an-old-deployment):
+
 Note: You must set the `alias` parameter with `cleanup`.
 
 ```diff
@@ -133,7 +146,10 @@ type
 : Deployment type (docker, npm, static)
 
 alias
-: Target Now.sh subdomain or domain
+: Target now.sh subdomain or domain
+
+cleanup
+: Equivalent to `now rm --safe --yes $alias`
 
 rules_domain
 : Your domain
