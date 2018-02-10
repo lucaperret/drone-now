@@ -9,6 +9,7 @@ image: lucap/drone-now
 ---
 
 The Now plugin deploy your build to [now.sh](https://zeit.co/now). The below pipeline configuration demonstrates simple usage:
+Note: `deploy_name` is an optional parameter. If it is not given now.sh will deploy the root directory of your application.
 
 ```yaml
 pipeline:
@@ -16,6 +17,17 @@ pipeline:
     image: lucap/drone-now
     deploy_name: deployment-name
     secrets: [ now_token ]
+```
+
+Set the directory you want to deploy. See the [Deployment Documentation](https://zeit.co/docs/getting-started/deployment#) for more info.
+
+```yaml
+pipeline:
+  now:
+    image: lucap/drone-now
+    deploy_name: deployment-name
+    secrets: [ now_token ]
++   directory: public
 ```
 
 Example configuration with team scope:
@@ -26,6 +38,7 @@ pipeline:
     image: lucap/drone-now
     deploy_name: deployment-name
     secrets: [ now_token ]
+    directory: public
 +   team: myteam
 ```
 
@@ -38,6 +51,7 @@ pipeline:
     image: lucap/drone-now
     deploy_name: deployment-name
     secrets: [ now_token ]
+-   directory: public
 -   team: myteam
 +   type: npm
 ```
@@ -54,6 +68,20 @@ pipeline:
 +   alias: my-deployment-alias
 ```
 
+Example configuration for [Cleaning Up Old Deployments](https://zeit.co/docs/features/aliases):
+Note: You must set the `alias` parameter with `cleanup`.
+
+```diff
+pipeline:
+  now:
+    image: lucap/drone-now
+    deploy_name: deployment-name
+    secrets: [ now_token ]
+-   type: npm
++   alias: my-deployment-alias
++   cleanup: true
+```
+
 Example configuration with custom [Path Aliases](https://zeit.co/docs/features/path-aliases):
 
 ```diff
@@ -62,6 +90,8 @@ pipeline:
     image: lucap/drone-now
     deploy_name: deployment-name
     secrets: [ now_token ]
+-   alias: my-deployment-alias
+-   cleanup: true
 +   rules_domain: example.com
 +   rules_file: rules.json
 ```
@@ -87,8 +117,14 @@ now_token
 
 # Parameter Reference
 
+now_token
+: Your API token (can also be set implicitly with a secret named NOW_TOKEN)
+
 deploy_name
 : Set the name of the deployment
+
+directory
+: The directory you want to deploy
 
 team
 : Set the team scope

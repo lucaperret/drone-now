@@ -2,25 +2,30 @@
 set -e
 
 NOW_DEPLOY_OPTIONS=" --no-clipboard"
-NOW_AUTH=""
 
-if [ -n "$NOW_TOKEN" ]
+# Get the token or error
+if [ -z "$PLUGIN_NOW_TOKEN" ]
 then
-    NOW_TOKEN_OPTION=" --token=$NOW_TOKEN"
-    NOW_AUTH="$NOW_AUTH $NOW_TOKEN_OPTION"
-else
-    echo "> Error!! the secret $NOW_TOKEN is required!"
-    exit 1;
+    # No explicit token provided, check for secret
+    if [ -z "$NOW_TOKEN" ]
+    then
+        echo "> Error!! either the parameter now_token or the secret NOW_TOKEN is required!"
+        exit 1;
+    else
+        PLUGIN_NOW_TOKEN="$NOW_TOKEN"
+    fi
 fi
 
+# Get the team if provided
 if [ -n "$PLUGIN_TEAM" ]
 then
     echo "> adding team $PLUGIN_TEAM"
-    NOW_TEAM_OPTION=" --team $PLUGIN_TEAM"
-    NOW_AUTH="$NOW_AUTH $NOW_TEAM_OPTION"
+    NOW_TEAM_OPTION="--team $PLUGIN_TEAM"
 else
     echo "> No team name provided."
 fi
+
+NOW_AUTH="$NOW_AUTH --token $PLUGIN_NOW_TOKEN $NOW_TEAM_OPTION"
 
 if [ -n "$PLUGIN_DEPLOY_NAME" ]
 then
@@ -35,13 +40,19 @@ then
     echo "> adding type $PLUGIN_TYPE"
     NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS} --$PLUGIN_TYPE"
 else
-    echo "> No deployment type provided."
+    echo "> No deployment type provided, now.sh will try to detect it..."
 fi
 
-if [ -n "$PLUGIN_DIRECTORY" ]
+if [ -n "$NOW_AUTH" ]
 then
+    DEPLOY_DIR="$PLUGIN_DIRECTORY"
+    # Let the user know which directory they are deploying
+    if [ -z "$DEPLOY_DIR" ]
+    then
+        DEPLOY_DIR="."
+    fi
     NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS}"
-    echo "> Deploying $PLUGIN_DIRECTORY on now.sh…" &&
+    echo "> Deploying $DEPLOY_DIR on now.sh…" &&
     NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_DEPLOY_OPTIONS $PLUGIN_DIRECTORY) &&
     echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL";
 else
