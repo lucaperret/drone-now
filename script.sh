@@ -16,13 +16,12 @@ then
     fi
 fi
 
-# Get the team if provided
 if [ -n "$PLUGIN_TEAM" ]
 then
-    echo "> adding team $PLUGIN_TEAM"
+    echo "> adding custom team scope $PLUGIN_TEAM"
     NOW_TEAM_OPTION="--team $PLUGIN_TEAM"
 else
-    echo "> No team name provided."
+    echo "> No custom team scope provided."
 fi
 
 NOW_AUTH="$NOW_AUTH --token $PLUGIN_NOW_TOKEN $NOW_TEAM_OPTION"
@@ -43,21 +42,14 @@ else
     echo "> No deployment type provided, now.sh will try to detect it..."
 fi
 
-if [ -n "$NOW_AUTH" ]
+if [ -n "$PLUGIN_DIRECTORY" ]
 then
-    DEPLOY_DIR="$PLUGIN_DIRECTORY"
-    # Let the user know which directory they are deploying
-    if [ -z "$DEPLOY_DIR" ]
-    then
-        DEPLOY_DIR="."
-    fi
-    NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS}"
-    echo "> Deploying $DEPLOY_DIR on now.sh…" &&
-    NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_DEPLOY_OPTIONS $PLUGIN_DIRECTORY) &&
-    echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL";
-else
-    echo "> Error!! the directory parameter is required"
+    echo "> Deploying $PLUGIN_DIRECTORY on now.sh…"
 fi
+
+NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS}"
+NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_DEPLOY_OPTIONS $PLUGIN_DIRECTORY) &&
+echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL";
 
 if [ -n "$PLUGIN_ALIAS" ]
 then
