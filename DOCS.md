@@ -10,7 +10,7 @@ image: lucap/drone-now
 
 The Now plugin deploy your build to [now.sh](https://zeit.co/now). The below pipeline configuration demonstrates simple usage:
 
-Note: `deploy_name` is an optional parameter. If it is not given now.sh will deploy the root directory of your application.
+Note: `deploy_name` is an optional parameter. If it is not given now.sh will use name of the working directory .
 
 ```yaml
 pipeline:
@@ -38,7 +38,7 @@ pipeline:
   now:
     image: lucap/drone-now
     deploy_name: deployment-name
--   secrets: [ now_token ]
+    secrets: [ now_token ]
 +   directory: public
 ```
 
@@ -63,7 +63,6 @@ pipeline:
     image: lucap/drone-now
     deploy_name: deployment-name
     secrets: [ now_token ]
--   directory: public
 -   team: myteam
 +   type: npm
 ```
@@ -76,7 +75,7 @@ pipeline:
     image: lucap/drone-now
     deploy_name: deployment-name
     secrets: [ now_token ]
--   type: npm
+    type: npm
 +   alias: my-deployment-alias
 ```
 

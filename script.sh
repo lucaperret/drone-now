@@ -48,7 +48,6 @@ then
     echo "> Deploying $PLUGIN_DIRECTORY on now.sh…"
 fi
 
-NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS}"
 NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_DEPLOY_OPTIONS $PLUGIN_DIRECTORY) &&
 echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL";
 
