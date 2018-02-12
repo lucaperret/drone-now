@@ -1,7 +1,7 @@
 # Drone-now
 ![Now logo](now.png?raw=true "now.sh")
 
-> Deploying to [now.sh](https://zeit.co/now) with [Drone](https://drone.io) CI.
+> Deploying to [▲ZEIT now](https://zeit.co/now) with [Drone](https://drone.io) CI.
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/lucap/drone-now.svg)](https://hub.docker.com/r/lucap/drone-now/)
 [![Image](https://images.microbadger.com/badges/image/lucap/drone-now.svg)](https://microbadger.com/images/lucap/drone-now "Get your own image badge on microbadger.com")
