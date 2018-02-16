@@ -3,6 +3,7 @@ pipeline:
     image: plugins/docker
     secrets: [ docker_username, docker_password ]
     repo: lucap/drone-now
-    auto_tag: true
     when:
       event: tag
+branches:
+  - master
