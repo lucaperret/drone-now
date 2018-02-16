@@ -77,7 +77,7 @@ pipeline:
     image: lucap/drone-now
     deploy_name: deployment-name
     secrets: [ now_token ]
-    type: npm
+-   type: npm
 +   alias: my-deployment-alias
 ```
 
@@ -91,7 +91,6 @@ pipeline:
     image: lucap/drone-now
     deploy_name: deployment-name
     secrets: [ now_token ]
-    type: npm
 +   alias: my-deployment-alias
 +   cleanup: true
 ```
@@ -104,7 +103,6 @@ pipeline:
     image: lucap/drone-now
     deploy_name: deployment-name
     secrets: [ now_token ]
--   type: npm
 -   alias: my-deployment-alias
 -   cleanup: true
 +   rules_domain: example.com
