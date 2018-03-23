@@ -122,6 +122,17 @@ pipeline:
 +   scale: 2
 ```
 
+Example configuration for specifying the `--public` argument for the `now` CLI.
+
+```diff
+pipeline:
+  now:
+    image: lucap/drone-now
+    deploy_name: deployment-name
+    secrets: [ now_token ]
+-   scale: 2
++   public: true
+```
 
 # Secret Reference
 
