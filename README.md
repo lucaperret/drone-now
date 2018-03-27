@@ -45,4 +45,5 @@ pipeline:
     directory: public
     alias: my.deployment.com
     secrets: [ now_token ]
+    public: true
 ```
