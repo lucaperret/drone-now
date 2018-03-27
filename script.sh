@@ -7,10 +7,10 @@ NOW_AUTH=""
 # Is this a public deployment?
 if [ "$PLUGIN_PUBLIC" == "true" ]
 then
-  echo "> adding option --public"
+  echo "> adding option --public.  If you are using an OSS plan, your source and logs will be public!"
   NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS} --public"
 else
-  echo "> --public option not specified"
+  echo "> --public option not specified."
 fi
 
 # Get the token or error
