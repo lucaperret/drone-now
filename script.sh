@@ -64,8 +64,8 @@ then
     # Use alias in local config instead of set alias
     echo "> Assigning alias…" &&
     ALIAS_SUCCESS_MESSAGE=$(now alias $NOW_AUTH $NOW_DEPLOYMENT_URL) &&
-    echo "$ALIAS_SUCCESS_MESSAGE" &&
-    NOW_DEPLOYMENT_URL=$(cut -d " " -f2 <<< $ALIAS_SUCCESS_MESSAGE)
+    echo "$ALIAS_SUCCESS_MESSAGE"
+    NOW_DEPLOYMENT_URL=$(cut -d " " -f2 <<< $ALIAS_SUCCESS_MESSAGE
 fi
 
 if [ -n "$PLUGIN_ALIAS" ] && [ -z "$PLUGIN_LOCAL_CONFIG" ]
