@@ -2,7 +2,7 @@ pipeline:
   docker:
     image: plugins/docker
     secrets: [ docker_username, docker_password ]
-    repo: lucap/drone-now
+    repo: andyet/drone-now
     when:
       event: tag
 branches:

@@ -43,6 +43,14 @@ else
     echo "> No deployment type provided, now.sh will try to detect it..."
 fi
 
+if [ -n "$PLUGIN_LOCAL_CONFIG" ]
+then
+    echo "> using local config at path $PLUGIN_LOCAL_CONFIG"
+    NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS} -A $PLUGIN_LOCAL_CONFIG"
+else
+    echo "> No local config provided, now will not use a local config"
+fi
+
 if [ -n "$PLUGIN_DIRECTORY" ]
 then
     echo "> Deploying $PLUGIN_DIRECTORY on now.sh…"
@@ -51,7 +59,16 @@ fi
 NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_DEPLOY_OPTIONS $PLUGIN_DIRECTORY) &&
 echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL";
 
-if [ -n "$PLUGIN_ALIAS" ]
+if [ -n "$PLUGIN_LOCAL_CONFIG" ]
+then
+    # Use alias in local config instead of set alias
+    echo "> Assigning alias…" &&
+    ALIAS_SUCCESS_MESSAGE=$(now alias $NOW_AUTH $NOW_DEPLOYMENT_URL) &&
+    echo "$ALIAS_SUCCESS_MESSAGE" &&
+    NOW_DEPLOYMENT_URL=$(cut -d " " -f2 <<< $ALIAS_SUCCESS_MESSAGE)
+fi
+
+if [ -n "$PLUGIN_ALIAS" ] && [ -z "$PLUGIN_LOCAL_CONFIG" ]
 then
     echo "> Assigning alias…" &&
     ALIAS_SUCCESS_MESSAGE=$(now alias $NOW_AUTH $NOW_DEPLOYMENT_URL $PLUGIN_ALIAS) &&
