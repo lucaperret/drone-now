@@ -27,14 +27,6 @@ fi
 
 NOW_AUTH="$NOW_AUTH --token $PLUGIN_NOW_TOKEN $NOW_TEAM_OPTION"
 
-if [ -n "$PLUGIN_DEPLOY_NAME" ]
-then
-    echo "> adding deploy_name $PLUGIN_DEPLOY_NAME"
-    NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS} --name $PLUGIN_DEPLOY_NAME"
-else
-    echo "> No deployment name provided. The directory will be used as the name"
-fi
-
 if [ -n "$PLUGIN_TYPE" ]
 then
     echo "> adding type $PLUGIN_TYPE"
@@ -47,8 +39,18 @@ if [ -n "$PLUGIN_LOCAL_CONFIG" ]
 then
     echo "> using local config at path $PLUGIN_LOCAL_CONFIG"
     NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS} -A $PLUGIN_LOCAL_CONFIG"
+    NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_DEPLOY_OPTIONS $PLUGIN_DIRECTORY) &&
+    echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL";
 else
     echo "> No local config provided, now will not use a local config"
+fi
+
+if [ -n "$PLUGIN_DEPLOY_NAME" ]
+then
+    echo "> adding deploy_name $PLUGIN_DEPLOY_NAME"
+    NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS} --name $PLUGIN_DEPLOY_NAME"
+else
+    echo "> No deployment name provided. The directory will be used as the name"
 fi
 
 if [ -n "$PLUGIN_DIRECTORY" ]
@@ -56,16 +58,18 @@ then
     echo "> Deploying $PLUGIN_DIRECTORY on now.sh…"
 fi
 
-NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_DEPLOY_OPTIONS $PLUGIN_DIRECTORY) &&
-echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL";
+if [ -z "$PLUGIN_LOCAL_CONFIG" ]; then
+    NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_DEPLOY_OPTIONS $PLUGIN_DIRECTORY) &&
+    echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL";
+fi
 
 if [ -n "$PLUGIN_LOCAL_CONFIG" ]
 then
     # Use alias in local config instead of set alias
     echo "> Assigning alias…" &&
-    ALIAS_SUCCESS_MESSAGE=$(now alias $NOW_AUTH $NOW_DEPLOYMENT_URL) &&
+    ALIAS_SUCCESS_MESSAGE=$(now alias $NOW_AUTH -A $PLUGIN_LOCAL_CONFIG) &&
     echo "$ALIAS_SUCCESS_MESSAGE"
-    NOW_DEPLOYMENT_URL=$(cut -d " " -f2 <<< $ALIAS_SUCCESS_MESSAGE
+    NOW_DEPLOYMENT_URL=$(echo $ALIAS_SUCCESS_MESSAGE | cut -d " " -f3 )
 fi
 
 if [ -n "$PLUGIN_ALIAS" ] && [ -z "$PLUGIN_LOCAL_CONFIG" ]
