@@ -134,6 +134,8 @@ If you have a local config specified the local config options will take preceden
   "type": "static"
 }
 ```
+Note that the default behavior of `now` applies. If you do not specify a `"type"`, it will try to detect based on the presence of a static directory path (set by `path:`), a package.json, or a Dockerfile. If you do not set an alias in the local config file, this plugin will not attempt to alias your deployment.
+
 ```diff
 pipeline:
   now:
