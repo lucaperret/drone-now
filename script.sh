@@ -29,7 +29,7 @@ if [ -n "$PLUGIN_DIRECTORY" ]; then
 fi
 
 if [ -n "$PLUGIN_LOCAL_CONFIG" ]; then
-    echo "> using local config at path $PLUGIN_LOCAL_CONFIG"
+    echo "> using local config called $PLUGIN_LOCAL_CONFIG"
     NOW_DEPLOY_OPTIONS="${NOW_DEPLOY_OPTIONS} -A ../$PLUGIN_LOCAL_CONFIG"
     NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_DEPLOY_OPTIONS $PLUGIN_DIRECTORY) &&
     echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL";
