@@ -34,7 +34,11 @@ if [ -n "$PLUGIN_LOCAL_CONFIG" ]; then
     NOW_DEPLOYMENT_URL=$(now $NOW_AUTH $NOW_DEPLOY_OPTIONS $PLUGIN_DIRECTORY) &&
     echo "> Success! Deployment complete to $NOW_DEPLOYMENT_URL";
 
-    if grep -q "alias" $PLUGIN_LOCAL_CONFIG; then
+    if [ -n "$PLUGIN_ALIAS" ]; then
+        echo "> Assigning alias…" &&
+        ALIAS_SUCCESS_MESSAGE=$(now alias $NOW_AUTH $NOW_DEPLOYMENT_URL $PLUGIN_ALIAS) &&
+        echo "$ALIAS_SUCCESS_MESSAGE"
+    elif grep -q "alias" $PLUGIN_LOCAL_CONFIG; then
         # Use alias in local config instead of set alias
         echo "> Assigning alias…" &&
         ALIAS_SUCCESS_MESSAGE=$(now alias $NOW_AUTH -A ./$PLUGIN_LOCAL_CONFIG) &&
