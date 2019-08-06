@@ -122,6 +122,30 @@ pipeline:
 +   scale: 2
 ```
 
+## Local Config
+
+The plugin supports configuration using [local config options](https://zeit.co/docs/features/configuration) in a `now.json` file.
+If you have a local config specified the local config options will take precedence over any duplicate options specified in the drone config. For example:
+```
+# now.json
+{
+  "name": "my-cool-deployment",
+  "alias": "cool-deployment.now.sh",
+  "type": "static"
+}
+```
+Note that the default behavior of `now` applies. If you do not specify a `"type"`, it will try to detect based on the presence of a static directory path (set by `path:`), a package.json, or a Dockerfile. If you do not set an alias in the local config file, this plugin will not attempt to alias your deployment.
+
+```diff
+pipeline:
+  now:
+    image: lucap/drone-now
+    deploy_name: deployment-name # The deployment will be named 'my-cool-deployment'
++   alias: my-deployment-alias # The alias will be set to 'cool-deployment.now.sh'
+    secrets: [ now_token ]
+    local_config: now.json
+-   scale: 2
+```
 
 # Secret Reference
 
@@ -158,4 +182,7 @@ rules_file
 : File that contain set of rules
 
 scale
-: Min and Max scaling values
+: Min and Max scaling values e.g. "scale: 0 3"
+
+local_config:
+: name of the file. The plugin assumes that the file is in the root dir
